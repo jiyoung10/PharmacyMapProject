@@ -1,7 +1,6 @@
 package com.example.pharmacyMapProject.api.service;
 
 import com.example.pharmacyMapProject.api.dto.KakaoApiResponseDto;
-import com.example.pharmacyMapProject.config.RestTemplateConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,8 +21,8 @@ public class KakaoAddressSearchService {
     private final KakaoUriBuildService kakaoUriBuildService;
     private final RestTemplate restTemplate;
 
-    @Value(value = "${kakao.rest.api.key}")
-    private final String kakaoRestApiKey;
+    @Value("${kakao.rest.api.key}")
+    private String kakaoRestApiKey;
 
     public KakaoApiResponseDto requestAddressSearch(String address) {
 
@@ -34,7 +33,7 @@ public class KakaoAddressSearchService {
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, "KakaoAK " + kakaoRestApiKey);
 
-        HttpEntity httpEntity = new HttpEntity<>(headers);
+        HttpEntity<Object> httpEntity = new HttpEntity<>(headers);
 
         // kakao api 호출
         return restTemplate.exchange(uri, HttpMethod.GET, httpEntity, KakaoApiResponseDto.class).getBody();
