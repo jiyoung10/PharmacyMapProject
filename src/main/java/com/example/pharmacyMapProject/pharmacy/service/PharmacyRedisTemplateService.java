@@ -1,4 +1,4 @@
-package com.example.pharmacyMapProject.pharmacy.controller;
+package com.example.pharmacyMapProject.pharmacy.service;
 
 import com.example.pharmacyMapProject.pharmacy.dto.PharmacyDto;
 import com.fasterxml.jackson.core.JsonProcessingException;

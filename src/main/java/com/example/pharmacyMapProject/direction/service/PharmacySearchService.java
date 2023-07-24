@@ -1,6 +1,6 @@
 package com.example.pharmacyMapProject.direction.service;
 
-import com.example.pharmacyMapProject.pharmacy.controller.PharmacyRedisTemplateService;
+import com.example.pharmacyMapProject.pharmacy.service.PharmacyRedisTemplateService;
 import com.example.pharmacyMapProject.pharmacy.dto.PharmacyDto;
 import com.example.pharmacyMapProject.pharmacy.entity.Pharmacy;
 import com.example.pharmacyMapProject.pharmacy.service.PharmacyRepositoryService;

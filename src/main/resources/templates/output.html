@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>약국 찾기 안내 메인 페이지</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+  <style>
+    body, h1, p, input, button {
+      font-family: "맑은 고딕", sans-serif;
+    }
+  </style>
+</head>
+<body>
+<div class="body">
+  <form action="/search" method = "post">
+    <div>
+      <h1>근처 약국 안내 서비스</h1>
+    </div>
+    <table class="table table-hover">
+      <tr>
+        <th>약국명</th>
+        <th>약국 주소</th>
+        <th>거리</th>
+        <th>길안내 링크</th>
+        <th>로드뷰 링크</th>
+      </tr>
+      <tr th:each="pharmacy : ${outputFormList}">
+        <td th:text="${pharmacy.getPharmacyName()}"></td>
+        <td th:text="${pharmacy.getPharmacyAddress()}"></td>
+        <td th:text="${pharmacy.getDistance()}"></td>
+        <td><a th:href="@{${pharmacy.getDirectionUrl()}}" th:text="${pharmacy.getDirectionUrl()}"></a></td>
+        <td><a th:href="@{${pharmacy.getRoadViewUrl()}}" th:text="${pharmacy.getRoadViewUrl()}"></a></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>

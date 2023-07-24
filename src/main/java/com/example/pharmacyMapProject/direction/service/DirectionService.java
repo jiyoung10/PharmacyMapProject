@@ -97,7 +97,7 @@ public class DirectionService {
 
     }
 
-    // Haversine formula
+    // Haversine formula (고객과 약국 사이의 거리 계산)
     private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
         lat1 = Math.toRadians(lat1);
         lon1 = Math.toRadians(lon1);

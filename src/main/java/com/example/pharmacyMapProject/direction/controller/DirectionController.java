@@ -21,7 +21,7 @@ public class DirectionController {
 
         log.info("[DirectionController searchDirection] direction url : {}", result);
 
-        return "redirect: " + result;
+        return "redirect:" + result;
     }
 
 
