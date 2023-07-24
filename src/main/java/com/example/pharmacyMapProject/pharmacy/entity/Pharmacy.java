@@ -1,5 +1,6 @@
 package com.example.pharmacyMapProject.pharmacy.entity;
 
+import com.example.pharmacyMapProject.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pharmacy {
+public class Pharmacy extends BaseTimeEntity {
 
     @Id // PK 값을 자동 생성
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,15 +24,8 @@ public class Pharmacy {
     private double latitude;
     private double longitude;
 
-    public Pharmacy update(Long id, String pharmacyAddress, String pharmacyName, double latitude, double longitude) {
-        return new Pharmacy(
-                this.id = id,
-                this.pharmacyAddress = pharmacyAddress,
-                this.pharmacyName = pharmacyName,
-                this.latitude = latitude,
-                this.longitude = longitude
-        );
-
+    public void changePharmacyAddress(String address) {
+        this.pharmacyAddress = address;
     }
 
 }

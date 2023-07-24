@@ -2,13 +2,18 @@ package com.example.pharmacyMapProject.pharmacy.repository
 
 import com.example.pharmacyMapProject.AbstractContainerBaseTest
 import com.example.pharmacyMapProject.pharmacy.entity.Pharmacy
+import com.example.pharmacyMapProject.pharmacy.service.PharmacyRepositoryService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
+
+import java.time.LocalDateTime
 
 class PharmacyRepositoryTest extends AbstractContainerBaseTest {
 
     @Autowired
     private PharmacyRepository pharmacyRepository
+
+    @Autowired
+    private PharmacyRepositoryService pharmacyRepositoryService;
 
     // 각 메서드 실행 전 정리
     def setup() {
@@ -80,16 +85,31 @@ class PharmacyRepositoryTest extends AbstractContainerBaseTest {
         when:
         def result = pharmacyRepository.save(pharmacy)
 
-        // id로 객체 조회 후 update
+        pharmacyRepositoryService.updateAddress(result.getId(), updateAddress)
         def updatePharmacy = pharmacyRepository.findById(result.getId()).get()
-        updatePharmacy.update(result.getId(), updateAddress, name, latitude, longitude)
-        def updateResult = pharmacyRepository.save(updatePharmacy)
 
         then:
-        updateResult.getPharmacyAddress() == updateAddress
-        updateResult.getPharmacyName() == name
-        updateResult.getLatitude() == latitude
-        updateResult.getLongitude() == longitude
+        updatePharmacy.getPharmacyAddress() == updateAddress
+    }
+
+    def "BaseTimeEntity 등록"() {
+        given:
+        LocalDateTime now = LocalDateTime.now()
+        String address = "서울 특별시 성북구 종암동"
+        String name = "은혜 약국"
+
+        def pharmacy = Pharmacy.builder()
+                .pharmacyAddress(address)
+                .pharmacyName(name)
+                .build()
+
+        when:
+        pharmacyRepository.save(pharmacy)
+        def result = pharmacyRepository.findAll()
+
+        then:
+        result.get(0).getCreatedDate().isAfter(now)
+        result.get(0).getModifiedDate().isAfter(now)
     }
 
 }

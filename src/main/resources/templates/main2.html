@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>약국 찾기 안내 메인 페이지</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+  <style>
+    body, h1, p, input, button {
+      font-family: "맑은 고딕", sans-serif;
+    }
+  </style>
+</head>
+<body>
+<div class="body">
+<form th:action="/search" method = "post">
+<div>
+  <h1>근처 약국 안내 서비스</h1>
+  <p>주소를 입력하시면 주소 기준으로 가까운 약국의 위치 최대 3곳 추천드립니다.</p>
+</div>
+
+<div th:fragment="content">
+    <label for="address">주소:</label>
+    <input type="text" id="address" name="address" placeholder="ex) 서울 성북구 종암로 1길" required>
+    <button type="submit">길찾기</button>
+</div>
+</form>
+</div>
+</body>
+</html>
